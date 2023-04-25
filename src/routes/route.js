@@ -167,49 +167,18 @@ router.get("/sol2", function (req, res) {
 });
 
 // Assignment Problem 3 (Dated :24-04-2023)
-let players =
-   [
-       {
-           "name": "manish",
-           "dob": "1/1/1995",
-           "gender": "male",
-           "city": "jalandhar",
-           "sports": [
-               "swimming"
-           ]
-       },
-       {
-           "name": "gopal",
-           "dob": "1/09/1995",
-           "gender": "male",
-           "city": "delhi",
-           "sports": [
-               "soccer"
-           ]
-       },
-       {
-           "name": "lokesh",
-           "dob": "1/1/1990",
-           "gender": "male",
-           "city": "mumbai",
-           "sports": [
-               "soccer"
-           ]
-       },
-   ]
-   router.post("/players", function (req, res) {
-    let myarr = players;
-    let input = req.body
-    const existingPlayer = players.find(player => player.name === input.name); //handling edge cases
-    if (existingPlayer) {
-      return res.send({ message: 'Player already exists' });
-    } 
-    else {
-  
-    myarr.push(input)
-   return res.send(  { data: players , status: true }  );
-  }
-  });
+
+ router.post( "/get-people", function (req, res){
+  const persons = req.body.persons;
+  const votingAge = req.body.votingAge;
+
+  const voters = persons.filter(persons => persons.age >= votingAge);
+  voters.forEach(voters => voters.votingStatus = true);
+
+  const result = voters.filter(voters => voters.votingStatus);
+
+  res.send(result);
+});
 
 
 module.exports = router;
