@@ -200,7 +200,7 @@ let players =
    router.post("/players", function (req, res) {
     let myarr = players;
     let input = req.body
-    const existingPlayer = players.find(player => player.name === input.name); //handlling edge cases
+    const existingPlayer = players.find(player => player.name === input.name); //handling edge cases
     if (existingPlayer) {
       return res.send({ message: 'Player already exists' });
     } 
