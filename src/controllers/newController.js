@@ -1,4 +1,5 @@
 const newModel = require("../models/newModel");
+const jwt = require('jsonwebtoken');
 
 const registerUser = async function (req, res) {
   try {
@@ -13,13 +14,13 @@ const loginUser = async function (req, res) {
   const { emailId, password } = req.body;
 
   try {
-    const user = await newModel.findOne({ emailId });
+    const user = await newModel.findOne({ emailId  });
 
     if (!user || user.password !== password) {
       return res.status(401).json({ error: "Invalid credentials." });
     }
 
-    const token = jwt.sign({ userId: user._id }, "your-secret-key");
+    const token = jwt.sign({ userId: user._id }, "Vishal-Singh-Technetium");
     res.json({ status: true, data: { token } });
   } catch (err) {
     res.status(400).json({ error: err.message });
