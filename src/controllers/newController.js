@@ -12,7 +12,6 @@ const registerUser = async function (req, res) {
 };
 const loginUser = async function (req, res) {
   const { emailId, password } = req.body;
-
   try {
     const user = await newModel.findOne({ emailId  });
 
@@ -20,13 +19,14 @@ const loginUser = async function (req, res) {
       return res.status(401).json({ error: "Invalid credentials." });
     }
 
-    const token = jwt.sign({ userId: user._id }, "Vishal-Singh-Technetium");
+    const token = jwt.sign({ userId: user._id }, "123");
     res.json({ status: true, data: { token } });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
 };
 const getUserDetails = async function (req, res) {
+  console.log("Con");
   try {
     const user = await newModel.findById(req.params.userId);
     if (!user) {
