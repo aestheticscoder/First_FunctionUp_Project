@@ -33,7 +33,8 @@ exports.getBooksInYear = async (req, res) => {
 
 exports.getParticularBooks = async (req, res) => {
   try {
-    const books = await Book.find({ $or: [{ name: req.body.name } ,{ year: req.body.year }] });
+    let data = req.body;
+    const books = await Book.find(data);  
     res.status(200).json(books);
   } catch (error) {
     console.log(error);
