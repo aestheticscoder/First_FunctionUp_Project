@@ -5,10 +5,11 @@ const publisherSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  address: {
+  headQuarter: {
     type: String,
     required: true,
-  },
-});
+  }
+  
+}, {timestamps : true});
 
-module.exports = mongoose.model("Publisher", publisherSchema);
+module.exports = mongoose.model("publisher", publisherSchema);
