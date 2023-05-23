@@ -1,25 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const userController= require("../controllers/userController");
-const newController = require("../controllers/newController");
-const { authenticateToken } = require("../models/Middlewares/middleware");
-router.get("/test-me", function (req, res) {
-    res.send("My first ever api!")
-})
+const  { validation } = require("../models/Middlewares/auth");
 
-router.post("/users", userController.createUser  )
+const userController = require("../controllers/userController");
+const userModel = require('../models/userModel');
 
-router.post("/login", userController.loginUser)
+router.post("/createUser", userController.createUser);
+router.post("/loginUser", userController.loginUser);
+router.get("/getUserData/:userId", validation, userController.getUserData);
+router.put("/updateUser/:userId", validation, userController.updateUser);
+router.delete("/deleteUser/:userId", validation, userController.deleteUser);
 
-//The userId is sent by front end
-router.get("/users/:userId", userController.getUserData)
 
-router.put("/users/:userId", userController.updateUser)
 
-//Assignment 8th May 2023
-router.post("/newusers", newController.registerUser  )
-router.post("/loginUser", newController.loginUser  )
-router.get("/users/:userId", authenticateToken,  newController.getUserDetails )
-router.put("/users/:userId", authenticateToken,  newController.updateUserDetails )
-router.delete("/users/:userId", authenticateToken, newController.deleteUserDetails)
 module.exports = router;

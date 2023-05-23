@@ -1,20 +1,24 @@
-const mongoose = require('mongoose');
-
-const userSchema = new mongoose.Schema( {
+const mongoose = require("mongoose");
+const userSchema = new mongoose.Schema(
+  {
     firstName: String,
     lastName: String,
     mobile: {
-        type: String,
-
-        required: true
+      type: Number,
+      required: true,
     },
     emailId: String,
     password: String,
     gender: {
-        type: String,
-        enum: ["male", "female", "other"]
+      type: String,
+      enum: ["Male", "Female", "Other"],
     },
     age: Number,
-}, { timestamps: true });
-
-module.exports = mongoose.model('User', userSchema)
+    isDeleted: {
+      type: String,
+      default: false,
+    },
+  },
+  { timestamps: true }
+);
+module.exports = mongoose.model("User", userSchema);
