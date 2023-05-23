@@ -1,7 +1,6 @@
 const jwt = require("jsonwebtoken");
 
 const authMiddleware = (req, res, next) => {
-  console.log("middleware", "hiii");
   const token = req.headers["x-auth-token"];
   if (!token) {
     return res.status(401).json({ error: "Access denied. Token missing." });
